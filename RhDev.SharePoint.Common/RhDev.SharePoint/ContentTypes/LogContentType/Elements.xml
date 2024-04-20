@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <!-- Parent ContentType: Item (0x01) -->
+  <ContentType ID="0x0100BAFD04BF53AB444A896F30313B9FC986" Name="$Resources:ContentTypesLogTitle" Group="$Resources:ContentTypesGroup" Description="$Resources:ContentTypesLogDescription" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{D46B34A7-97F5-47F6-BE65-3834DB76847F}" DisplayName="$Resources:FieldsLogMessage" Name="RhDevLogMessage" />
+      <FieldRef ID="{F39ECE57-3CD5-4817-B683-995AA4D890CC}" DisplayName="$Resources:FieldsLogSource" Name="RhDevLogSource" />
+      <FieldRef ID="{17D19FC2-A261-48BF-8F8C-FA3D503E5A44}" DisplayName="$Resources:FieldsLogLevel" Name="RhDevLogLevel" />
+    </FieldRefs>
+  </ContentType>
+</Elements>

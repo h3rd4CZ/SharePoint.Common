@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="5568a303-d4ee-42c7-b105-d56b02e011cd" SharePointProductVersion="16.0">
+  <Assemblies>
+    <Assembly Location="Solitea.SharePoint.Common.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Solitea.SharePoint.Common.DataAccess.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Solitea.SharePoint.Common.DataAccess.SharePoint.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Solitea.SharePoint.Common.Impl.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Solitea.SharePoint.Common.DataAccess.Sql.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Solitea.SharePoint.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <RootFiles>
+    <RootFile Location="Resources\Solitea.SharePoint.resx" />
+    <RootFile Location="Resources\Solitea.SharePoint.en-US.resx" />
+  </RootFiles>
+  <TemplateFiles>
+    <TemplateFile Location="Images\Solitea.SharePoint\feature.gif" />
+  </TemplateFiles>
+  <FeatureManifests>
+    <FeatureManifest Location="Solitea.SharePoint_Site\Feature.xml" />
+    <FeatureManifest Location="Solitea.SharePoint_Farm\Feature.xml" />
+    <FeatureManifest Location="Solitea.SharePoint_Web\Feature.xml" />
+  </FeatureManifests>
+</Solution>

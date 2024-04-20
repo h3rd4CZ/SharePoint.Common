@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" DefaultResourceFile="Solitea.SharePoint" Description="$Resources:FeatureWebDescription" Id="d691910d-4c56-49c5-a87c-0c7c3cd1e83e" ImageUrl="Solitea.SharePoint/feature.gif" ReceiverAssembly="Solitea.SharePoint, Version=1.0.0.0, Culture=neutral, PublicKeyToken=78afb44363f8be41" ReceiverClass="Solitea.SharePoint.Features.Web.WebEventReceiver" Scope="Web" Title="$Resources:FeatureWebTitle">
+  <ElementManifests>
+    <ElementManifest Location="ConfigurationListInstance\Elements.xml" />
+    <ElementManifest Location="ConfigurationList\Elements.xml" />
+    <ElementFile Location="ConfigurationList\Schema.xml" />
+    <ElementManifest Location="LogListInstance\Elements.xml" />
+    <ElementManifest Location="LogList\Elements.xml" />
+    <ElementFile Location="LogList\Schema.xml" />
+    <ElementManifest Location="DayOffListInstance\Elements.xml" />
+    <ElementManifest Location="DayOffList\Elements.xml" />
+    <ElementFile Location="DayOffList\Schema.xml" />
+  </ElementManifests>
+</Feature>

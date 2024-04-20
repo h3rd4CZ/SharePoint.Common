@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" ActivateOnDefault="FALSE" DefaultResourceFile="Solitea.SharePoint" Description="$Resources:FeatureFarmDescription" Id="7a2d9721-7980-45ca-b66e-c14b34c8a037" ImageUrl="Solitea.SharePoint/feature.gif" ReceiverAssembly="Solitea.SharePoint, Version=1.0.0.0, Culture=neutral, PublicKeyToken=78afb44363f8be41" ReceiverClass="Solitea.SharePoint.Features.Farm.FarmEventReceiver" Scope="Farm" Title="$Resources:FeatureFarmTitle"></Feature>

@@ -1,0 +1,185 @@
+﻿<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CAEA2749-9915-490A-8F41-934F9401EE93}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RhDev.SharePoint</RootNamespace>
+    <AssemblyName>RhDev.SharePoint</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetOfficeVersion>16.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <MinimumOfficeToolsVersion>14.0</MinimumOfficeToolsVersion>
+    <SandboxedSolution>False</SandboxedSolution>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>rh.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BuildNoTemplate|AnyCPU'">
+    <OutputPath>bin\BuildNoTemplate\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_assets\Microsoft.SharePoint.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\Farm\Farm.EventReceiver.cs">
+      <DependentUpon>Farm.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Web\Web.EventReceiver.cs">
+      <DependentUpon>Web.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\RhDev.SharePoint.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RhDev.SharePoint.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rh.snk" />
+    <None Include="ContentTypes\ConfigurationContentType\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f3f76e8d-a5d2-4c9f-836a-cbf202abc9ce}</SharePointProjectItemId>
+    </None>
+    <None Include="ContentTypes\DayOffContentType\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{408446cb-b9db-4a20-a69d-74d34f610d87}</SharePointProjectItemId>
+    </None>
+    <None Include="ContentTypes\LogContentType\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8f6ed389-eb05-4229-81b8-4dc0e87fc2d6}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Farm\Farm.feature">
+      <FeatureId>{d801f246-d36b-4ded-aa0b-bc6b2f5066d1}</FeatureId>
+    </None>
+    <None Include="Features\Site\Site.feature">
+      <FeatureId>{74d2b107-8358-4206-959c-f4864773a1bb}</FeatureId>
+    </None>
+    <None Include="Features\Web\Web.feature">
+      <FeatureId>{9f0ad5e8-cf1d-41fc-a435-391462988c00}</FeatureId>
+    </None>
+    <None Include="Fields\Fields\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e3a4b244-3365-4ef8-aeef-7ec17acb347e}</SharePointProjectItemId>
+    </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{264741cf-b89f-4fd9-a5ef-5e099f50e2ca}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ConfigurationList\ConfigurationListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7bfd6eb4-5f9e-46cd-93ac-c8fff29c87f4}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ConfigurationList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{fcc16077-ea22-4775-9982-cfc2aba4feae}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\DayOffList\DayOffListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8e432770-d392-4591-85e3-89da6ef5d8f1}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\DayOffList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{27f8caef-966e-4e5b-9f37-1c0738456f60}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\LogList\LogListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9d97dfb0-bff6-458c-be16-821925a25da9}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\LogList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4eeac70d-1812-4e4d-b394-4349c4433db0}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{5568a303-d4ee-42c7-b105-d56b02e011cd}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Resources\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2506a716-8b24-4980-b93a-dd2342a695b7}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContentTypes\ConfigurationContentType\Elements.xml" />
+    <Content Include="ContentTypes\DayOffContentType\Elements.xml" />
+    <Content Include="ContentTypes\LogContentType\Elements.xml" />
+    <Content Include="Fields\Fields\Elements.xml" />
+    <Content Include="Lists\ConfigurationList\ConfigurationListInstance\Elements.xml" />
+    <Content Include="Lists\ConfigurationList\Elements.xml" />
+    <Content Include="Lists\ConfigurationList\Schema.xml" />
+    <Content Include="Lists\DayOffList\DayOffListInstance\Elements.xml" />
+    <Content Include="Lists\DayOffList\Elements.xml" />
+    <Content Include="Lists\DayOffList\Schema.xml" />
+    <Content Include="Lists\LogList\Elements.xml" />
+    <Content Include="Lists\LogList\LogListInstance\Elements.xml" />
+    <Content Include="Lists\LogList\Schema.xml" />
+    <Content Include="Resources\RhDev.SharePoint.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RhDev.SharePoint.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Farm\Farm.Template.xml">
+      <DependentUpon>Farm.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Site\Site.Template.xml">
+      <DependentUpon>Site.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Web\Web.Template.xml">
+      <DependentUpon>Web.feature</DependentUpon>
+    </Content>
+    <Content Include="Images\RhDev.SharePoint\feature.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\RhDev.SharePoint.en-US.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RhDev.SharePoint.Common.DataAccess.SharePoint\RhDev.SharePoint.Common.DataAccess.SharePoint.csproj">
+      <Project>{0B63895B-89AB-4196-8391-0621AE510A7B}</Project>
+      <Name>RhDev.SharePoint.Common.DataAccess.SharePoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RhDev.SharePoint.Common\RhDev.SharePoint.Common.csproj">
+      <Project>{B4F833C4-CF1D-4075-8F79-61BC6DC189FE}</Project>
+      <Name>RhDev.SharePoint.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

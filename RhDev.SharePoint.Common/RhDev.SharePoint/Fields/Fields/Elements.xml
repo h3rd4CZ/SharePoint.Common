@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+
+  <!-- Application configuration fields -->
+  <Field ID="{E83D8FDC-A950-4350-B46B-B8BBF5C087F0}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="RhDevConfigKey" Group="$Resources:FieldsGroup" Type="Text" DisplayName="$Resources:FieldsConfigKey" Required="TRUE"></Field>
+  <Field ID="{60C71F08-B907-40E5-A784-BA4D26503C91}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="RhDevConfigValue" Group="$Resources:FieldsGroup" Type="Note" DisplayName="$Resources:FieldsConfigValue" Required="TRUE"></Field>
+  <Field ID="{5AC64C63-7B68-4259-AE12-B15E3BFE119C}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="RhDevConfigModule" Group="$Resources:FieldsGroup" Type="Text" DisplayName="$Resources:FieldsConfigModule" Required="TRUE"></Field>
+  
+  <!-- Application logging fields -->
+  <Field ID="{D46B34A7-97F5-47F6-BE65-3834DB76847F}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="RhDevLogMessage" Group="$Resources:FieldsGroup" Type="Note" DisplayName="$Resources:FieldsLogMessage"></Field>
+  <Field ID="{17D19FC2-A261-48BF-8F8C-FA3D503E5A44}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="RhDevLogLevel" Group="$Resources:FieldsGroup" Type="Choice" DisplayName="$Resources:FieldsLogLevel">
+    <CHOICES>
+      <CHOICE>Information</CHOICE>
+      <CHOICE>Debug</CHOICE>
+      <CHOICE>Error</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field ID="{F39ECE57-3CD5-4817-B683-995AA4D890CC}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="RhDevLogSource" Group="$Resources:FieldsGroup" Type="Text" DisplayName="$Resources:FieldsLogSource"></Field>
+
+  <!-- DayOffs list fields -->
+  <Field ID="{51921175-4B7D-4398-B34F-C64DE84746F5}" Name="RhDevDayOffDate" Type="DateTime" Format="DateOnly" DisplayName="$Resources:FieldsDayOffDate" Group="$Resources:FieldsGroup" ShowInEditForm="TRUE" ShowInDisplayForm="TRUE" ShowInNewForm="TRUE" />
+  <Field ID="{723F65C0-8534-4B13-B9AF-1997B40703B5}" Name="RhDevDayOffRepeat" Type="Boolean" DisplayName="$Resources:FieldsDayOffRepeat" Group="$Resources:FieldsGroup" ShowInEditForm="TRUE" ShowInDisplayForm="TRUE" ShowInNewForm="TRUE" >
+    <Default>1</Default>
+  </Field>
+  <Field ID="{656EF610-C202-47DE-8631-B9B3CC1FE7FC}" Name="RhDevDayOffLcid" Type="Number" DisplayName="$Resources:FieldsDayOffLcid" Group="$Resources:FieldsGroup" ShowInEditForm="TRUE" ShowInDisplayForm="TRUE" ShowInNewForm="TRUE" >
+    <Default>1029</Default>
+  </Field>
+  
+</Elements>

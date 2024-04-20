@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<List xmlns:ows="Microsoft SharePoint" Title="ConfigurationList" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/ConfigurationList" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/" EnableContentTypes="TRUE">
+  <MetaData>
+    <ContentTypes>
+      <ContentType ID="0x0100BEED88E552AE48A6987E99C4B1FB5F82" Name="$Resources:ContentTypesConfigurationTitle" Group="$Resources:ContentTypesGroup" Description="$Resources:ContentTypesConfigurationDescription" Inherits="TRUE" Version="0">
+        <FieldRefs>
+          <FieldRef ID="{E83D8FDC-A950-4350-B46B-B8BBF5C087F0}" DisplayName="$Resources:FieldsConfigKey" Required="TRUE" Name="soliteaConfigKey" />
+          <FieldRef ID="{60C71F08-B907-40E5-A784-BA4D26503C91}" DisplayName="$Resources:FieldsConfigValue" Required="TRUE" Name="soliteaConfigValue" />
+          <FieldRef ID="{5AC64C63-7B68-4259-AE12-B15E3BFE119C}" DisplayName="$Resources:FieldsConfigModule" Required="TRUE" Name="soliteaConfigModule" />
+          <RemoveFieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}"/>
+        </FieldRefs>
+      </ContentType>
+    </ContentTypes>
+    <Fields>
+      <Field ID="{E83D8FDC-A950-4350-B46B-B8BBF5C087F0}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="soliteaConfigKey" Group="$Resources:FieldsGroup" Type="Text" DisplayName="$Resources:FieldsConfigKey" Required="TRUE"></Field>
+      <Field ID="{60C71F08-B907-40E5-A784-BA4D26503C91}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="soliteaConfigValue" Group="$Resources:FieldsGroup" Type="Note" DisplayName="$Resources:FieldsConfigValue" Required="TRUE"></Field>
+      <Field ID="{5AC64C63-7B68-4259-AE12-B15E3BFE119C}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="soliteaConfigModule" Group="$Resources:FieldsGroup" Type="Text" DisplayName="$Resources:FieldsConfigModule" Required="TRUE"></Field>
+    </Fields>
+    <Views>
+
+
+      <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+
+          <FieldRef Name="LinkTitleNoMenu"></FieldRef>
+        </ViewFields>
+        <Query>
+          <OrderBy>
+
+            <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="AddNewAnnouncement" Location="Resource(wss,addnewitem)" />
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_ONET_HOME)" />
+        </ParameterBindings>
+      </View>
+      <View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/15/images/generic.png?rev=23" Url="AllItems.aspx">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <JSLink>clienttemplates.js</JSLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+          <FieldRef Name="soliteaConfigKey" />
+          <FieldRef Name="soliteaConfigValue" />
+        </ViewFields>
+        <Query>
+          <GroupBy Collapse="FALSE">
+            <FieldRef Name="soliteaConfigModule" />
+          </GroupBy>
+          <OrderBy>
+            <FieldRef Name="soliteaConfigKey" />
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
+        </ParameterBindings>
+      </View>
+    </Views>
+    <Forms>
+      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="NewForm" Url="NewForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+    </Forms>
+  </MetaData>
+</List>

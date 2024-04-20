@@ -1,0 +1,179 @@
+﻿<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{988A3CFF-B041-4E34-8E67-4A6B96F2093E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>$ext_safeprojectname$</RootNamespace>
+    <AssemblyName>$ext_safeprojectname$</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetOfficeVersion>16.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <MinimumOfficeToolsVersion>14.0</MinimumOfficeToolsVersion>
+    <SandboxedSolution>False</SandboxedSolution>
+    <IncludeAssemblyInPackage>False</IncludeAssemblyInPackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>CDL.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BuildNoTemplate|AnyCPU'">
+    <OutputPath>bin\BuildNoTemplate\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\Farm\Farm.EventReceiver.cs">
+      <DependentUpon>Farm.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Site\Site.EventReceiver.cs">
+      <DependentUpon>Site.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Web\Web.EventReceiver.cs">
+      <DependentUpon>Web.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\RhDev.Zakaznik.Reseni1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RhDev.Zakaznik.Reseni.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\RhDev.Zakaznik.Reseni.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CDL.snk" />
+    <None Include="Features\Farm\Farm.feature">
+      <FeatureId>{7818d741-f0cc-451a-9be1-459ffa2c6180}</FeatureId>
+    </None>
+    <None Include="Features\Web\Web.feature">
+      <FeatureId>{0cd62503-41fa-42d9-b1fd-79dbae7be1a2}</FeatureId>
+    </None>
+    <None Include="Features\Site\Site.feature">
+      <FeatureId>{1109dbd0-0acc-44d1-960b-44a114b8f033}</FeatureId>
+    </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{ccf15323-d9ef-404c-b2d9-1018b03fe0af}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{6e6ab860-0f32-4d7f-90bd-2275a1dcabec}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Resources\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{80453d52-00a1-473e-9044-9944d112943a}</SharePointProjectItemId>
+    </None>
+    <None Include="_service\deploy\000_Init.ps1" />
+    <None Include="_service\deploy\001_AddAndDeployCORE.ps1" />
+    <None Include="_service\deploy\002_AddAndDeployJOBS.ps1" />
+    <None Include="_service\deploy\003_SetupSiteCollection.ps1" />
+    <None Include="_service\deploy\004_ConfigureFarm.ps1" />
+    <None Include="_service\deploy\005_EnableFeatures.ps1" />
+    <None Include="_service\deploy\006_ConfigureConfiguration.ps1" />
+    <None Include="_service\deploy\007_EnableFeatures_Global.ps1" />
+    <None Include="_service\deploy\008_CreateDatabase.ps1" />
+    <None Include="_service\deploy\009_AddAdminAsApplicationAdmin.ps1" />
+    <None Include="_service\deploy\801_RestartTimer.NOAUTORUN.ps1" />
+    <None Include="_service\deploy\Helpers\FeatureHelper.ps1" />
+    <None Include="_service\deploy\Helpers\SecureStoreServiceHelper.ps1" />
+    <None Include="_service\deploy\Helpers\SolutionDeploymentHelper.ps1" />
+    <None Include="_service\deploy\Helpers\SqlHelper.ps1" />
+    <None Include="_service\deploy\Others\ExecuteInstallation.ps1" />
+    <None Include="_service\deploy\Others\UpdateApplication.ps1" />
+    <None Include="_service\upgrade\ExecuteUpgradeScripts.ps1" />
+    <None Include="_service\upgrade\UpgradeScriptsHelper.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Farm\Farm.Template.xml">
+      <DependentUpon>Farm.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Web\Web.Template.xml">
+      <DependentUpon>Web.feature</DependentUpon>
+    </Content>
+    <Content Include="Resources\RhDev.Zakaznik.Reseni.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RhDev.Zakaznik.Reseni1.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Site\Site.Template.xml">
+      <DependentUpon>Site.feature</DependentUpon>
+    </Content>
+    <Content Include="Images\RhDev.Zakaznik.Reseni\feature.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\RhDev.Zakaznik.Reseni.en-US.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_service\deploy\Packages\" />
+    <Folder Include="_service\SQL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\$ext_safeprojectname$.Common.DataAccess.SharePoint\$ext_safeprojectname$.Common.DataAccess.SharePoint.csproj">
+      <Project>$ext_guid2$</Project>
+      <Name>$ext_safeprojectname$.Common.DataAccess.SharePoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\$ext_safeprojectname$.Common\$ext_safeprojectname$.Common.csproj">
+      <Project>$ext_guid1$</Project>
+      <Name>$ext_safeprojectname$.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RhDev.SharePoint.Common.DataAccess.SharePoint\RhDev.SharePoint.Common.DataAccess.SharePoint.csproj">
+      <Project>{0b63895b-89ab-4196-8391-0621ae510a7b}</Project>
+      <Name>RhDev.SharePoint.Common.DataAccess.SharePoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RhDev.SharePoint.Common\RhDev.SharePoint.Common.csproj">
+      <Project>{b4f833c4-cf1d-4075-8f79-61bc6dc189fe}</Project>
+      <Name>RhDev.SharePoint.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

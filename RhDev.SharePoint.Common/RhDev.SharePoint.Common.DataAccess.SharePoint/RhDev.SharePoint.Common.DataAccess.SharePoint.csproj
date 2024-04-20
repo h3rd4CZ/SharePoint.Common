@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B63895B-89AB-4196-8391-0621AE510A7B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RhDev.SharePoint.Common.DataAccess.SharePoint</RootNamespace>
+    <AssemblyName>RhDev.SharePoint.Common.DataAccess.SharePoint</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>rh.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BuildNoTemplate|AnyCPU'">
+    <OutputPath>bin\BuildNoTemplate\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Title>RhDev.SharePoint.Common.DataAccess.SharePoint</Title>
+    <Description>Common library with sharepoint implementation services. Contains repository pattern specific classes with access to sharepoint object model</Description>
+    <!--!!Dont change this at all, it is bind to ci cd nuget package auto versioning as a placeholder-->
+    <Version>0.0.0-nugetinit</Version>
+    <ReleaseNotes>Initial library release</ReleaseNotes>
+    <Authors>Rostislav Heriser (Rostislav.Heriser@RhDev.cz)</Authors>
+    <Company>RhDev, a.s.</Company>
+    <PackageTags>RhDev;Common.Library;SharePoint;Implementation;SharePointObjectModel</PackageTags>
+    <Copyright>© Copyright 2020 RhDev, a.s.</Copyright>
+    <PackageOutputPath>bin\Package</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Tasks.Pack" version="5.8.0-preview.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="structuremap.web-signed" Version="[3.1.6.191]">
+    </PackageReference>
+    <PackageReference Include="structuremap-signed" Version="[3.1.6.191]">
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.BusinessData, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_assets\Microsoft.BusinessData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.SecureStoreService, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_assets\Microsoft.Office.SecureStoreService.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.SecureStoreService.Server.Security, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_assets\Microsoft.Office.SecureStoreService.Server.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_assets\Microsoft.SharePoint.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Security, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_assets\Microsoft.SharePoint.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Taxonomy, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_assets\Microsoft.SharePoint.Taxonomy.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CentralClockProvider.cs" />
+    <Compile Include="Configuration\ConfigurationDataSourceWrapper.cs" />
+    <Compile Include="Configuration\ConfigurationDataSources.cs" />
+    <Compile Include="Configuration\FarmPropertiesDataSource.cs" />
+    <Compile Include="Configuration\ListConfigurationDataSource.cs" />
+    <Compile Include="Configuration\Objects\GlobalConfiguration.cs" />
+    <Compile Include="Configuration\Objects\ObjectConfigurationFactory.cs" />
+    <Compile Include="DayOffProvider.cs" />
+    <Compile Include="DefaultCompositionConfiguration.cs" />
+    <Compile Include="Extensions\SPListExtensions.cs" />
+    <Compile Include="Extensions\SPListItemExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="FrontEndUtility.cs" />
+    <Compile Include="Installation\Builders\ContentTypeBuilder.cs" />
+    <Compile Include="Installation\Builders\FieldBuilder.cs" />
+    <Compile Include="Installation\Builders\ListBuilder.cs" />
+    <Compile Include="Installation\Builders\ModificationBuilder.cs" />
+    <Compile Include="Installation\Builders\WebBuilder.cs" />
+    <Compile Include="Installation\CommonWebFeatureInstallation.cs" />
+    <Compile Include="Installation\FeatureInstallation.cs" />
+    <Compile Include="Installation\FeatureReceiverBase.cs" />
+    <Compile Include="Installation\FeatureUpgradeRunner.cs" />
+    <Compile Include="Installation\JobDefinitionInstallationBase.cs" />
+    <Compile Include="Installation\SiteFeatureRequiredException.cs" />
+    <Compile Include="Installation\TraceLoggerFeatureInstallation.cs" />
+    <Compile Include="Logging\CorrelationId.cs" />
+    <Compile Include="Logging\DiagnosticsArea.cs" />
+    <Compile Include="Logging\DiagnosticsAreaCollection.cs" />
+    <Compile Include="Logging\DiagnosticsCategory.cs" />
+    <Compile Include="Logging\DiagnosticsCategoryCollection.cs" />
+    <Compile Include="Logging\DiagnosticsService.cs" />
+    <Compile Include="Logging\LoggingException.cs" />
+    <Compile Include="Logging\SharePointTraceLogger.cs" />
+    <Compile Include="Mail\MailConfigurationProvider.cs" />
+    <Compile Include="Mail\MailConfigurationRepository.cs" />
+    <Compile Include="Mail\MailingFactory.cs" />
+    <Compile Include="Mail\SharePointMailSender.cs" />
+    <Compile Include="Mail\SmtpMailSender.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ApplicationConfigurationRepository.cs" />
+    <Compile Include="Repository\CAML\CAMLCompositeAndFilter.cs" />
+    <Compile Include="Repository\CAML\CAMLCompositeBinaryFilterBase.cs" />
+    <Compile Include="Repository\CAML\CAMLCompositeFilterBase.cs" />
+    <Compile Include="Repository\CAML\CAMLCompositeOrFilter.cs" />
+    <Compile Include="Repository\CAML\CAMLFilter.cs" />
+    <Compile Include="Repository\CAML\CAMLFilters.cs" />
+    <Compile Include="Repository\CAML\CAMLQueryBuilder.cs" />
+    <Compile Include="Repository\CAML\CAMLType.cs" />
+    <Compile Include="Repository\CAML\GroupByQueryModifier.cs" />
+    <Compile Include="Repository\CAML\IQueryModifier.cs" />
+    <Compile Include="Repository\CAML\OrderByQueryModifier.cs" />
+    <Compile Include="Repository\CommonRepositoryFactory.cs" />
+    <Compile Include="Repository\ConcurrentDataAccessRepository.cs" />
+    <Compile Include="Repository\Config.cs" />
+    <Compile Include="Repository\DayOffConfigurationRepository.cs" />
+    <Compile Include="Repository\EntityRepositoryBase.cs" />
+    <Compile Include="Repository\ListFetcher.cs" />
+    <Compile Include="Repository\ListProvider.cs" />
+    <Compile Include="Repository\LogListRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\WebFileRepository.cs" />
+    <Compile Include="Resources\DiagnosticsServiceStrings.Designer.cs" />
+    <Compile Include="Resources\Resources.cs" />
+    <Compile Include="Security\DefaultCompositionConfiguration.cs" />
+    <Compile Include="Security\DocumentPermissionsRepositoryFactory.cs" />
+    <Compile Include="Security\ExternalCredentialsRepository.cs" />
+    <Compile Include="Security\FormsAuthHelper.cs" />
+    <Compile Include="Security\FrontEndSecurityContext.cs" />
+    <Compile Include="Security\FrontEndSharePointContext.cs" />
+    <Compile Include="Security\GroupInfoProvider.cs" />
+    <Compile Include="Security\GroupMembershipManager.cs" />
+    <Compile Include="Security\Impersonation.cs" />
+    <Compile Include="Security\Installation\GroupInstallationHelper.cs" />
+    <Compile Include="Security\Installation\BaseUserGroupsSetup.cs" />
+    <Compile Include="Security\ISharePointContext.cs" />
+    <Compile Include="Security\PermissionSetDefinition.cs" />
+    <Compile Include="Security\PermissionSetsUtility.cs" />
+    <Compile Include="Security\Permission\DocumentPermissionsRepository.cs" />
+    <Compile Include="Security\Permission\DocumentPermissionsRepositoryBase.cs" />
+    <Compile Include="Security\PrincipalsFromADGroupQueryMaximumReached.cs" />
+    <Compile Include="Security\RolesUtility.cs" />
+    <Compile Include="Security\SecurityRepositoryFactory.cs" />
+    <Compile Include="Security\TimerJobCompositionConfigurationOverrides.cs" />
+    <Compile Include="Security\TimerJobSecurityContext.cs" />
+    <Compile Include="Security\UserInfoRepository.cs" />
+    <Compile Include="Security\WebServiceSecurityContext.cs" />
+    <Compile Include="Taxonomy\TermProvider.cs" />
+    <Compile Include="Taxonomy\TaxonomyProvider.cs" />
+    <Compile Include="TimerJobCompositionConfigurationOverrides.cs" />
+    <Compile Include="Utils\DisabledEventReceiverScope.cs" />
+    <Compile Include="Utils\IWebPartTemplator.cs" />
+    <Compile Include="Utils\PageArrangement.cs" />
+    <Compile Include="Utils\WebPartInstantiateException.cs" />
+    <Compile Include="Validation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DiagnosticsServiceStrings.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RhDev.SharePoint.Common.DataAccess\RhDev.SharePoint.Common.DataAccess.csproj">
+      <Project>{693518B7-EEA6-4132-B912-55203648E005}</Project>
+      <Name>RhDev.SharePoint.Common.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RhDev.SharePoint.Common\RhDev.SharePoint.Common.csproj">
+      <Project>{B4F833C4-CF1D-4075-8F79-61BC6DC189FE}</Project>
+      <Name>RhDev.SharePoint.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rh.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\NuGet.Build.Tasks.Pack.5.8.0-preview.1\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('..\packages\NuGet.Build.Tasks.Pack.5.8.0-preview.1\build\NuGet.Build.Tasks.Pack.targets')" />
+</Project>

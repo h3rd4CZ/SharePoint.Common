@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="2b9c2c67-d35e-467d-a743-912e61d05f5e" solutionId="2b9c2c67-d35e-467d-a743-912e61d05f5e" resetWebServer="false" sharePointProductVersion="16.0" name="RhDev.SharePoint.Externals" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <customAssembly location="FluentRibbon.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\AN.Sharepoint.FluentRibbon.4.0.0\lib\net45\FluentRibbon.dll" />
+    <customAssembly location="StructureMap.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\structuremap-signed.3.1.6.191\lib\net40\StructureMap.dll" />
+    <customAssembly location="StructureMap.Net4.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\structuremap-signed.3.1.6.191\lib\net40\StructureMap.Net4.dll" />
+    <customAssembly location="StructureMap.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\structuremap.web-signed.3.1.6.191\lib\net40\StructureMap.Web.dll" />
+    <customAssembly location="EntityFramework.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll" />
+    <customAssembly location="EntityFramework.SqlServer.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll" />
+  </assemblies>
+</package>

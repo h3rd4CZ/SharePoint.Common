@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="$guid8$" solutionId="$guid8$" resetWebServer="false" sharePointProductVersion="16.0" name="$ext_safeprojectname$" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="$ext_safeprojectname$.dll" deploymentTarget="GlobalAssemblyCache">
+      <safeControls>
+        <safeControl assemblyName="$ext_safeprojectname$.dll" namespaceName="$ext_safeprojectname$" typeName="*" isSafeAgainstScript="false" />
+      </safeControls>
+    </projectOutputAssembly>
+  </assemblies>
+  <features>
+    <featureReference itemId="$guid2$" />
+    <featureReference itemId="$guid4$" />
+    <featureReference itemId="$guid6$" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="$guid9$" />
+    <projectItemReference itemId="$guid10$" />
+  </projectItems>
+</package>

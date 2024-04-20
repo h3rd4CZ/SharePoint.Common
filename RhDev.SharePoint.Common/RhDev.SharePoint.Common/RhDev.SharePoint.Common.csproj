@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4F833C4-CF1D-4075-8F79-61BC6DC189FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RhDev.SharePoint.Common</RootNamespace>
+    <AssemblyName>RhDev.SharePoint.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>rh.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BuildNoTemplate|AnyCPU'">
+    <OutputPath>bin\BuildNoTemplate\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Title>Solitea.SharePoint.Common</Title>
+    <Description>Base library with abstractions, POCOs and base system services</Description>
+    <!--!!Dont change this at all, it is bind to ci cd nuget package auto versioning as a placeholder-->
+    <Version>0.0.0-nugetinit</Version>
+    <ReleaseNotes>Initial library release</ReleaseNotes>
+    <Authors>Rostislav Heriser (Rostislav.Heriser@solitea.cz)</Authors>
+    <Company>Solitea, a.s.</Company>
+    <PackageTags>Solitea;Common;Library;Base;AbstractClass;ServiceDefinitions</PackageTags>
+    <Copyright>© Copyright 2020 Solitea, a.s.</Copyright>
+    <PackageOutputPath>bin\Package</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="NSubstitute">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="NuGet.Build.Tasks.Pack" version="5.8.0-preview.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Castle.Core" Version="4.4.0">
+    </PackageReference>
+    <PackageReference Include="EntityFramework" Version="[6.2.0]">
+    </PackageReference>
+    <PackageReference Include="structuremap.web-signed" Version="[3.1.6.191]">
+    </PackageReference>
+    <PackageReference Include="structuremap-signed" Version="[3.1.6.191]">
+    </PackageReference>
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.3.0">
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Caching\CacheBypass.cs" />
+    <Compile Include="Caching\CacheKey.cs" />
+    <Compile Include="Caching\ICache.cs" />
+    <Compile Include="CentralClock.cs" />
+    <Compile Include="Composition\CompositionConfigurationBase.cs" />
+    <Compile Include="Composition\CompositionDefinition.cs" />
+    <Compile Include="Composition\CommonContainerRoot.cs" />
+    <Compile Include="Composition\ConventionConfigurationBase.cs" />
+    <Compile Include="Composition\Factory\ApplicationContainer.cs" />
+    <Compile Include="Composition\Factory\ApplicationContainerFactory.cs" />
+    <Compile Include="Composition\Factory\ApplicationContainerSetup.cs" />
+    <Compile Include="Composition\Factory\Builder\ContainerRegistrationDefinitionBuilder.cs" />
+    <Compile Include="Composition\Factory\Builder\ContainerRegistrationDefinitionComponentBuilder.cs" />
+    <Compile Include="Composition\Factory\Builder\ContainerRegistrationDefinitionLayerBuilder.cs" />
+    <Compile Include="Composition\Factory\Builder\IContainerRegistrationDefinitionBuilder.cs" />
+    <Compile Include="Composition\Factory\Definitions\ContainerRegistrationComponentDefinition.cs" />
+    <Compile Include="Composition\Factory\Definitions\ContainerRegistrationDefinition.cs" />
+    <Compile Include="Composition\Factory\Definitions\ContainerRegistrationLayerDefinition.cs" />
+    <Compile Include="Composition\Factory\Definitions\IContainerRegistrationDefinition.cs" />
+    <Compile Include="Composition\Factory\IApplicationContainer.cs" />
+    <Compile Include="Composition\Factory\IApplicationContainerSetup.cs" />
+    <Compile Include="Composition\IAutoRegisteredService.cs" />
+    <Compile Include="Composition\IService.cs" />
+    <Compile Include="Composition\ServiceAutoRegistrationConvention.cs" />
+    <Compile Include="Composition\ServiceBase.cs" />
+    <Compile Include="Configuration\ConfigurationKey.cs" />
+    <Compile Include="Configuration\ConfigurationObject.cs" />
+    <Compile Include="Configuration\ConfigurationValue.cs" />
+    <Compile Include="Configuration\FarmConfiguration.cs" />
+    <Compile Include="Configuration\IConfigurationCacheStrategy.cs" />
+    <Compile Include="Configuration\IConfigurationDataSource.cs" />
+    <Compile Include="Configuration\IConfigurationManager.cs" />
+    <Compile Include="Configuration\MissingConfigurationValueException.cs" />
+    <Compile Include="Configuration\WithCacheConfigurationCacheStrategy.cs" />
+    <Compile Include="Configuration\WithoutCacheConfigurationCacheStrategy.cs" />
+    <Compile Include="ContentTypeFormUrls.cs" />
+    <Compile Include="DuplicateEntityException.cs" />
+    <Compile Include="EntityBase.cs" />
+    <Compile Include="EntityLink.cs" />
+    <Compile Include="EntityNotFoundException.cs" />
+    <Compile Include="Exceptions\SerializationFailedException.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DecimalExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\GeneralExtensions.cs" />
+    <Compile Include="Extensions\ICollectionExtensions.cs" />
+    <Compile Include="Extensions\IListExtensions.cs" />
+    <Compile Include="Extensions\IQueryable.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Folder.cs" />
+    <Compile Include="FolderNotFoundException.cs" />
+    <Compile Include="GroupInfo.cs" />
+    <Compile Include="HistoryEntityBase.cs" />
+    <Compile Include="History\DocumentHistoryEntry.cs" />
+    <Compile Include="History\DocumentHistoryEntryBase.cs" />
+    <Compile Include="History\DocumentHistoryEvent.cs" />
+    <Compile Include="History\DocumentHistorySerializable.cs" />
+    <Compile Include="History\IItemHistory.cs" />
+    <Compile Include="ICentralClockProvider.cs" />
+    <Compile Include="IDayOffProvider.cs" />
+    <Compile Include="Installation\IFeatureUpgradeAction.cs" />
+    <Compile Include="IObjectConfigurationFactory.cs" />
+    <Compile Include="IPrincipalInfo.cs" />
+    <Compile Include="IUnitDesignation.cs" />
+    <Compile Include="Lazy.cs" />
+    <Compile Include="Logging\ConsoleTraceLogger.cs" />
+    <Compile Include="Logging\Constants.cs" />
+    <Compile Include="Logging\DiagnosticsServiceConfiguration.cs" />
+    <Compile Include="Logging\EventSeverity.cs" />
+    <Compile Include="Logging\ITraceLogger.cs" />
+    <Compile Include="Logging\TraceCategories.cs" />
+    <Compile Include="Logging\TraceCategory.cs" />
+    <Compile Include="Logging\TraceSeverity.cs" />
+    <Compile Include="Mail\IMailConfigurationProvider.cs" />
+    <Compile Include="Mail\IMailFormatter.cs" />
+    <Compile Include="Mail\MailConfiguration.cs" />
+    <Compile Include="Mail\MailQueueItem.cs" />
+    <Compile Include="Mail\MailQueueItemAttachment.cs" />
+    <Compile Include="Mail\MailSendingFailedException.cs" />
+    <Compile Include="Notifications\INotificationSender.cs" />
+    <Compile Include="Notifications\INotificationTemplate.cs" />
+    <Compile Include="Notifications\INotificationTemplateFactory.cs" />
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\NotificationItem.cs" />
+    <Compile Include="Notifications\NotificationSendingFailedException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Section.cs" />
+    <Compile Include="SectionDesignation.cs" />
+    <Compile Include="SecurityEncryptor.cs" />
+    <Compile Include="Security\ApplicationAdministratorGroup.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Security\ApplicationGroups.cs" />
+    <Compile Include="Security\ExternalCredentialsNotFoundException.cs" />
+    <Compile Include="Security\GroupDefinitionBase.cs" />
+    <Compile Include="Security\GroupMapping.cs" />
+    <Compile Include="Security\GroupName.cs" />
+    <Compile Include="Security\IExternalCredentialsStore.cs" />
+    <Compile Include="Security\IGroupInfoProvider.cs" />
+    <Compile Include="Security\IGroupMembershipManager.cs" />
+    <Compile Include="Security\IHierarchicalGroupProvider.cs" />
+    <Compile Include="Security\ISecurityContext.cs" />
+    <Compile Include="Security\ItemRoleDefinition.cs" />
+    <Compile Include="Security\IUserInfoProvider.cs" />
+    <Compile Include="Security\SectionGroupDefinition.cs" />
+    <Compile Include="Security\ApplicationGroup.cs" />
+    <Compile Include="Security\UserAccessInfo.cs" />
+    <Compile Include="Security\UserGroupInfo.cs" />
+    <Compile Include="Security\UserInfoNameEqualityComparer.cs" />
+    <Compile Include="Security\UserNotFoundException.cs" />
+    <Compile Include="Serialization\XmlSerialization.cs" />
+    <Compile Include="Serialization\XmlSerializationException.cs" />
+    <Compile Include="SPListNotFoundException.cs" />
+    <Compile Include="Taxonomy\ITermProvider.cs" />
+    <Compile Include="Taxonomy\TermPath.cs" />
+    <Compile Include="Taxonomy\TermSetIdentificator.cs" />
+    <Compile Include="Taxonomy\TermValue.cs" />
+    <Compile Include="Taxonomy\TermValueLabel.cs" />
+    <Compile Include="Test\NSubstituteServiceLocator.cs" />
+    <Compile Include="Test\UnitTestBase.cs" />
+    <Compile Include="Test\UnitTestOf.cs" />
+    <Compile Include="UnitDesignationBase.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="Utils\Guard.cs" />
+    <Compile Include="Utils\PageArrangementConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="rh.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\NuGet.Build.Tasks.Pack.5.8.0-preview.1\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('..\packages\NuGet.Build.Tasks.Pack.5.8.0-preview.1\build\NuGet.Build.Tasks.Pack.targets')" />
+</Project>

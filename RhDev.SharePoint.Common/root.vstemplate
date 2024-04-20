@@ -1,0 +1,16 @@
+<VSTemplate Version="2.0.0" Type="ProjectGroup"
+    xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>RhDev multi project</Name>
+    <Description>An example of a multi-project template</Description>
+    <ProjectType>CSharp</ProjectType>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <SolutionFolder Name="Common">
+        <ProjectTemplateLink CopyParameters="true" ProjectName="$ext_safeprojectname$.Common">RhDev.Customer.Solution.Common\MyTemplate.vstemplate</ProjectTemplateLink>
+      </SolutionFolder>
+        <ProjectTemplateLink CopyParameters="true" ProjectName="$ext_safeprojectname$">RhDev.Customer.Solution\MyTemplate.vstemplate</ProjectTemplateLink>
+    </ProjectCollection>
+  </TemplateContent>
+</VSTemplate>

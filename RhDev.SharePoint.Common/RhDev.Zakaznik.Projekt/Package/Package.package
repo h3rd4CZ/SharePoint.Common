@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package dslVersion="1.0.0.0" 
+        Id="769fa640-6815-4326-ae01-996e87a5bdfb" 
+        solutionId="769fa640-6815-4326-ae01-996e87a5bdfb" 
+        xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" 
+        name="Solitea.Customer.Solution"
+        sharePointProductVersion="16.0">
+</package>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="$guid4$" solutionId="$guid4$" resetWebServer="false" sharePointProductVersion="16.0" name="$ext_safeprojectname$.TimerJobs" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="$ext_safeprojectname$.Common.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\$ext_safeprojectname$.Common\$ext_safeprojectname$.Common.csproj" />
+    <projectOutputAssembly location="$ext_safeprojectname$.Common.DataAccess.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\$ext_safeprojectname$.Common.DataAccess\$ext_safeprojectname$.Common.DataAccess.csproj" />
+    <projectOutputAssembly location="$ext_safeprojectname$.Common.DataAccess.SharePoint.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\$ext_safeprojectname$.Common.DataAccess.SharePoint\$ext_safeprojectname$.Common.DataAccess.SharePoint.csproj" />
+    <projectOutputAssembly location="$ext_safeprojectname$.Common.Impl.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\$ext_safeprojectname$.Common.Impl\$ext_safeprojectname$.Common.Impl.csproj" />
+  </assemblies>
+  <features>
+    <featureReference itemId="$ext_guid3$" />
+  </features>
+</package>

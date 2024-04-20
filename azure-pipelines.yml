@@ -1,0 +1,85 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+  
+name: 1.$(Year:yy).$(DayOfYear).$(BuildID)
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'BuildNoTemplate'
+
+steps:
+- script: echo $(Build.BuildNumber)
+
+- task: NuGetToolInstaller@1
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'select'
+    vstsFeed: '17d2d4d1-b48a-43a8-a6df-4c3110b2e517/b11d0215-db2f-4556-8283-261af018a75b'
+    
+- task: PowerShell@2
+  displayName: 'Update npm versions'
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      (Get-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common\Solitea.SharePoint.Common.csproj" -Raw) -replace '0.0.0-nugetinit', $env:BN | Set-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common\Solitea.SharePoint.Common.csproj"
+      (Get-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.DataAccess\Solitea.SharePoint.Common.DataAccess.csproj" -Raw) -replace '0.0.0-nugetinit', $env:BN | Set-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.DataAccess\Solitea.SharePoint.Common.DataAccess.csproj"
+      (Get-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.DataAccess.SharePoint\Solitea.SharePoint.Common.DataAccess.SharePoint.csproj" -Raw) -replace '0.0.0-nugetinit', $env:BN | Set-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.DataAccess.SharePoint\Solitea.SharePoint.Common.DataAccess.SharePoint.csproj"
+      (Get-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.DataAccess.Sql\Solitea.SharePoint.Common.DataAccess.Sql.csproj" -Raw) -replace '0.0.0-nugetinit', $env:BN | Set-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.DataAccess.Sql\Solitea.SharePoint.Common.DataAccess.Sql.csproj"
+      (Get-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.Impl\Solitea.SharePoint.Common.Impl.csproj" -Raw) -replace '0.0.0-nugetinit', $env:BN | Set-Content "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common.Impl\Solitea.SharePoint.Common.Impl.csproj"
+      #Get-Content -Path "$env:WD\Solitea.SharePoint.Common\Solitea.SharePoint.Common\Solitea.SharePoint.Common.csproj"
+
+- task: Assembly-Info-NetFramework@2
+  displayName: 'Update File version of all Common packages'
+  inputs:
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: '**\Solitea.SharePoint.Common*\Properties\AssemblyInfo.cs'
+    InsertAttributes: false
+    FileEncoding: 'auto'
+    WriteBOM: false
+    FileVersionNumber: '$(Build.BuildNumber)'
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  enabled: true
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\Solitea.SharePoint.Common.Test.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    codeCoverageEnabled: true
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**\Solitea.SharePoint.Common*\bin\Package\**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+ 
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/Solitea.SharePoint.Common*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '17d2d4d1-b48a-43a8-a6df-4c3110b2e517/b11d0215-db2f-4556-8283-261af018a75b'

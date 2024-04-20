@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="5568a303-d4ee-42c7-b105-d56b02e011cd" solutionId="5568a303-d4ee-42c7-b105-d56b02e011cd" resetWebServer="false" sharePointProductVersion="16.0" name="RhDev.SharePoint" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="RhDev.SharePoint.Common.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\RhDev.SharePoint.Common\RhDev.SharePoint.Common.csproj" />
+    <projectOutputAssembly location="RhDev.SharePoint.Common.DataAccess.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\RhDev.SharePoint.Common.DataAccess\RhDev.SharePoint.Common.DataAccess.csproj" />
+    <projectOutputAssembly location="RhDev.SharePoint.Common.DataAccess.SharePoint.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\RhDev.SharePoint.Common.DataAccess.SharePoint\RhDev.SharePoint.Common.DataAccess.SharePoint.csproj" />
+    <projectOutputAssembly location="RhDev.SharePoint.Common.Impl.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\RhDev.SharePoint.Common.Impl\RhDev.SharePoint.Common.Impl.csproj" />
+    <projectOutputAssembly location="RhDev.SharePoint.Common.DataAccess.Sql.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\RhDev.SharePoint.Common.DataAccess.Sql\RhDev.SharePoint.Common.DataAccess.Sql.csproj" />
+  </assemblies>
+  <features>
+    <featureReference itemId="74d2b107-8358-4206-959c-f4864773a1bb" />
+    <featureReference itemId="d801f246-d36b-4ded-aa0b-bc6b2f5066d1" />
+    <featureReference itemId="9f0ad5e8-cf1d-41fc-a435-391462988c00" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="264741cf-b89f-4fd9-a5ef-5e099f50e2ca" />
+    <projectItemReference itemId="2506a716-8b24-4980-b93a-dd2342a695b7" />
+  </projectItems>
+</package>

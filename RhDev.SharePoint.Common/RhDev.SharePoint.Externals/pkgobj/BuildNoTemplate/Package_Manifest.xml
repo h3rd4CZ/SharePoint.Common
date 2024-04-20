@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="2b9c2c67-d35e-467d-a743-912e61d05f5e" SharePointProductVersion="16.0">
+  <Assemblies>
+    <Assembly Location="FluentRibbon.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="StructureMap.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="StructureMap.Net4.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="StructureMap.Web.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="EntityFramework.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="EntityFramework.SqlServer.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Solitea.SharePoint.Externals.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+</Solution>

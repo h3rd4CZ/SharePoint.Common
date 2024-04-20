@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <!-- Parent ContentType: Item (0x01) -->
+  <ContentType ID="0x0100BEED88E552AE48A6987E99C4B1FB5F82" Name="$Resources:ContentTypesConfigurationTitle" Group="$Resources:ContentTypesGroup" Description="$Resources:ContentTypesConfigurationDescription" Inherits="TRUE" Version="0">
+    <FieldRefs>
+      <FieldRef ID="{E83D8FDC-A950-4350-B46B-B8BBF5C087F0}" DisplayName="$Resources:FieldsConfigKey" Required="TRUE" Name="soliteaConfigKey" />
+      <FieldRef ID="{60C71F08-B907-40E5-A784-BA4D26503C91}" DisplayName="$Resources:FieldsConfigValue" Required="TRUE" Name="soliteaConfigValue" />
+      <FieldRef ID="{5AC64C63-7B68-4259-AE12-B15E3BFE119C}" DisplayName="$Resources:FieldsConfigModule" Required="TRUE" Name="soliteaConfigModule" />
+    </FieldRefs>
+  </ContentType>
+</Elements>

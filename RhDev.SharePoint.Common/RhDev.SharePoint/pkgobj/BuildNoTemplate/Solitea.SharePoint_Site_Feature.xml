@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" DefaultResourceFile="Solitea.SharePoint" Description="$Resources:FeatureSiteDescription" Id="e0f3966e-25d5-4427-959d-6f5cf5c19095" ImageUrl="Solitea.SharePoint/feature.gif" Scope="Site" Title="$Resources:FeatureSiteTitle">
+  <ElementManifests>
+    <ElementManifest Location="Fields\Elements.xml" />
+    <ElementManifest Location="ConfigurationContentType\Elements.xml" />
+    <ElementManifest Location="LogContentType\Elements.xml" />
+    <ElementManifest Location="DayOffContentType\Elements.xml" />
+  </ElementManifests>
+</Feature>

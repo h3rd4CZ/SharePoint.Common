@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<List xmlns:ows="Microsoft SharePoint" Title="$Resources:ListsLogTitle" FolderCreation="TRUE" Direction="$Resources:Direction;" Url="Lists/$Resources-ListsLogTitle" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/" EnableContentTypes="TRUE">
+  <MetaData>
+    <ContentTypes>
+      <ContentType ID="0x0100BAFD04BF53AB444A896F30313B9FC986" Name="$Resources:ContentTypesLogTitle" Group="$Resources:ContentTypesGroup" Description="$Resources:ContentTypesLogDescription" Inherits="TRUE" Version="0">
+        <FieldRefs>
+          <FieldRef ID="{D46B34A7-97F5-47F6-BE65-3834DB76847F}" DisplayName="$Resources:FieldsLogMessage" Name="soliteaLogMessage" />
+          <FieldRef ID="{F39ECE57-3CD5-4817-B683-995AA4D890CC}" DisplayName="$Resources:FieldsLogSource" Name="soliteaLogSource" />
+          <FieldRef ID="{17D19FC2-A261-48BF-8F8C-FA3D503E5A44}" DisplayName="$Resources:FieldsLogLevel" Name="soliteaLogLevel" />
+        </FieldRefs>
+      </ContentType>
+      <ContentTypeRef ID="0x0120" />
+    </ContentTypes>
+    <Fields>
+
+      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" />
+      <Field ID="{D46B34A7-97F5-47F6-BE65-3834DB76847F}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="soliteaLogMessage" Group="$Resources:FieldsGroup" Type="Note" DisplayName="$Resources:FieldsLogMessage"></Field>
+      <Field ID="{F39ECE57-3CD5-4817-B683-995AA4D890CC}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="soliteaLogSource" Group="$Resources:FieldsGroup" Type="Text" DisplayName="$Resources:FieldsLogSource"></Field>
+      <Field ID="{17D19FC2-A261-48BF-8F8C-FA3D503E5A44}" SourceID="http://schemas.microsoft.com/sharepoint/v3" Name="soliteaLogLevel" Group="$Resources:FieldsGroup" Type="Choice" DisplayName="$Resources:FieldsLogLevel">
+        <CHOICES>
+          <CHOICE>Information</CHOICE>
+          <CHOICE>Debug</CHOICE>
+          <CHOICE>Error</CHOICE>
+        </CHOICES>
+      </Field>
+    </Fields>
+    <Views>
+
+
+      <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+
+          <FieldRef Name="LinkTitleNoMenu"></FieldRef>
+        </ViewFields>
+        <Query>
+          <OrderBy>
+
+            <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="AddNewAnnouncement" Location="Resource(wss,addnewitem)" />
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_ONET_HOME)" />
+        </ParameterBindings>
+      </View>
+      <View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/15/images/generic.png?rev=23" Url="AllItems.aspx">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <JSLink>clienttemplates.js</JSLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+          <FieldRef Name="DocIcon"></FieldRef>
+          <FieldRef Name="LinkTitle"></FieldRef>
+          <FieldRef Name="soliteaLogMessage" />
+          <FieldRef Name="soliteaLogSource" />
+          <FieldRef Name="soliteaLogLevel" />
+        </ViewFields>
+        <Query>
+          <OrderBy>
+            <FieldRef Name="Created" Ascending="FALSE"></FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
+        </ParameterBindings>
+      </View>
+    </Views>
+    <Forms>
+      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="NewForm" Url="NewForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+    </Forms>
+  </MetaData>
+</List>
