@@ -1,11 +1,6 @@
-# Solitea - BP common library
+# SharePoint - common library to build full-trust code on-premises sharepoint applications
 
 [![Build Status](https://dev.azure.com/Solitea-BP/Solitea/_apis/build/status/Common?branchName=master)](https://dev.azure.com/Solitea-BP/Solitea/_build/latest?definitionId=8&branchName=master)
-
-Solitea - BP common libary je projekt pro sjednocení vývoje a nastavení jednotných pravidel při vývoji zákaznických řešení pro oddělení BP.
-Projekt je určen pro zákaznická full-trust on-premises řešení pro platformy SharePoint 16 a 19.
-Součástí projektu je společná knihovna, šablona řešení do Visual studia a dokumentace jednotlivých komponent knihovny.
-Dokumentace níže popisuje základní pravidla vývoje včetně popisu a dokumentace jednotlivých komponent společné knihovny.
 
 **Obsah**
 
