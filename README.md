@@ -1,7 +1,7 @@
 # SharePoint - common library to build full-trust code on-premises sharepoint applications
 
 ## Obecná pravidla pro vývoj
-Každý vývoj by měl dodržovat základní pravidla objektově orientovaného návrhu. Řešení by měla dodržovat alespoň základní principy doménově řízeného vývoje (DDD). Jednotlivá řešení by měla být navrhována a strukturována do jednotlivých vrstev a komponent. Komponentově orientovaný návrh je důležitý při vývoji rozsáhlejších řešení. Každá komponenta by z důvodu lepší organizace kódu měla být rozdělena do jednotlivých vrstev. Jednotlivé vrstvy na sebe logicky odkazují.
+Vývoj by měl dodržovat základní pravidla objektově orientovaného návrhu. Řešení by měla dodržovat alespoň základní principy doménově řízeného vývoje (DDD). Jednotlivá řešení by měla být navrhována a strukturována do jednotlivých vrstev a komponent. Komponentově orientovaný návrh je důležitý při vývoji rozsáhlejších řešení. Každá komponenta by z důvodu lepší organizace kódu měla být rozdělena do jednotlivých vrstev. Jednotlivé vrstvy na sebe logicky odkazují.
 
 ![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/HighLevelView.png)
 
