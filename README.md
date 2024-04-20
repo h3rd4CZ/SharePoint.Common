@@ -30,7 +30,7 @@ Význam jednotlivých vrstev:
 ## Knihovna
 Samotná knihovna je distribuována jako sada NPM balíčků rozdělených do jednotlivých komponentových vrstev. V rámci CI je každá nová verze publikována do interního NPM feedu realizovaného pomocí Azure Artifacts.
 
-[Solitea common library Azure Artifacts feed](https://dev.azure.com/Solitea-BP/Solitea/_packaging?_a=feed&feed=dxnet "Solitea common library Azure Artifacts feed")
+[RhDev common library Azure Artifacts feed](https://dev.azure.com/RhDev-BP/RhDev/_packaging?_a=feed&feed=dxnet "RhDev common library Azure Artifacts feed")
 
 
 ![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/NugetCommonLib.png)
@@ -60,11 +60,11 @@ Pipeline buildu obsahuje posloupnost následujících akcí:
 | 3. PowerShell   |  Zapsání Nuget verze balíčků knihoven dle čísla buildu. Číslo buildu je definováno jako : ***1.$(Year:yy).$(DayOfYear).$(BuildID)***  Major verzi knihovny je v budoucnu možné posunout ručně na vyšší verzi. |
 | 4. Assembly-Info-NetFramework|  Zapsání verze buildu do *AssemblyInfo.cs*  do jednotlivých knihoven. Zapisuje se pouze File version, Assembly verze je nastavena defaultně na verzi **1.0.0.0**  |
 | 5. Build   | Build všech projektů řešení v dané build konfiguraci |
-| 6. Test   | Provedení definovaných testů. V rámci řešení je definováno několik testů rozdělěných do skupin. Code coverage je na cca 11%. V budoucnu je nutné zvýšit. Testovací třídy se nachází v assembly **Solitea.SharePoint.Common.Test.dll** |
+| 6. Test   | Provedení definovaných testů. V rámci řešení je definováno několik testů rozdělěných do skupin. Code coverage je na cca 11%. V budoucnu je nutné zvýšit. Testovací třídy se nachází v assembly **RhDev.SharePoint.Common.Test.dll** |
 | 7. CopyFiles   | Kopírování Nuget balíčků jako výsledku buildu do *artifactstagingdirectory* |
 | 8. NuGetCommand - push   | Vypublikování hotových NUGET balíčků do interního feedu |
 
-[Definice pipeline v Azure devops pipeline](https://dev.azure.com/Solitea-BP/Solitea/_apps/hub/ms.vss-build-web.ci-designer-hub?pipelineId=8&branch=master "Definice pipeline v Azure devops pipeline")
+[Definice pipeline v Azure devops pipeline](https://dev.azure.com/RhDev-BP/RhDev/_apps/hub/ms.vss-build-web.ci-designer-hub?pipelineId=8&branch=master "Definice pipeline v Azure devops pipeline")
 
 #### IoC
 
@@ -88,16 +88,16 @@ Příklad požadavku na sestavení kontejneru:
 > CompositionDefinition.cs
 
 ```csharp
-using Solitea.SharePoint.Common.Composition.Factory.Builder;
-using Solitea.SharePoint.Common.Composition.Factory.Definitions;
+using RhDev.SharePoint.Common.Composition.Factory.Builder;
+using RhDev.SharePoint.Common.Composition.Factory.Definitions;
 using System.Collections.Generic;
 
-namespace Solitea.SharePoint.Common.Composition
+namespace RhDev.SharePoint.Common.Composition
 {
     public static class CompositionDefinition
     {
         public static ContainerRegistrationDefinition GetDefinition() => ContainerRegistrationDefinitionBuilder
-                .Get("Solitea.Customer.Solution")
+                .Get("RhDev.Customer.Solution")
                 .WithComponents(new List<ContainerRegistrationComponentDefinition>
                 {
                     ContainerRegistrationDefinitionComponentBuilder.Get("Common")
@@ -105,13 +105,13 @@ namespace Solitea.SharePoint.Common.Composition
                             new List<ContainerRegistrationLayerDefinition>{
                                 ContainerRegistrationDefinitionLayerBuilder.GetNativeDataAccessSharePointLayer()
                                 .WithFrontendAndBackendRegistrations()
-                                .WithDefaultSoliteaPKTAndVersion().Build(),
+                                .WithDefaultRhDevPKTAndVersion().Build(),
                                  ContainerRegistrationDefinitionLayerBuilder.Get("DataAccess.Sql")
                                 .WithFrontendRegistrations()
-                               .WithDefaultSoliteaPKTAndVersion().Build(),
+                               .WithDefaultRhDevPKTAndVersion().Build(),
                                 ContainerRegistrationDefinitionLayerBuilder.GetNativeImplementationLayer()
                                 .WithBackendRegistrations()
-                                .WithDefaultSoliteaPKTAndVersion().Build(),
+                                .WithDefaultRhDevPKTAndVersion().Build(),
                         }).Build()
                 }).Build();
     }
@@ -165,9 +165,9 @@ V rámci registrace komponent je možné služby definovat jako auto-registračn
 > ICentralClockProvider.cs
 
 ```csharp
-using Solitea.SharePoint.Common.Caching.Composition;
+using RhDev.SharePoint.Common.Caching.Composition;
 
-namespace Solitea.SharePoint.Common
+namespace RhDev.SharePoint.Common
 {
     public interface ICentralClockProvider : IAutoRegisteredService
     {
@@ -184,9 +184,9 @@ Strong name knihoven musí obsahovat následující záznamy:
 | ------------ | ------------ |
 |1.0.0.0   | 78afb44363f8be41   |
 
-Verze všech knihoven musí být neměnná a nastavená na verzi **1.0.0.0**. Platí pro všechna Solitea BP řešení, u kterých dochází k IoC registracím pomocí kontejneru. Public key token je generován veřejným klíčem, kterým jsou podepisovány jednolivé Solitea common library. Tento klíč je přiložen v řešení vytvářeném ze šablony, vývojář řešení se nemusí o nic starat. Tyto defaultní parametry je možné v definici registrace zapsat pomocí builderu zmíněného výše:
+Verze všech knihoven musí být neměnná a nastavená na verzi **1.0.0.0**. Platí pro všechna RhDev BP řešení, u kterých dochází k IoC registracím pomocí kontejneru. Public key token je generován veřejným klíčem, kterým jsou podepisovány jednolivé RhDev common library. Tento klíč je přiložen v řešení vytvářeném ze šablony, vývojář řešení se nemusí o nic starat. Tyto defaultní parametry je možné v definici registrace zapsat pomocí builderu zmíněného výše:
 ```csharp
-WithDefaultSoliteaPKTAndVersion()
+WithDefaultRhDevPKTAndVersion()
 ```
 Metoda builderu výše zajistí definici s defaultními parametry verze a PKT.
 
@@ -194,7 +194,7 @@ Metoda builderu výše zajistí definici s defaultními parametry verze a PKT.
 Každá class library reprezentující příslušnou vrstvu v dané komponentě by měla dodržovat následující jmennou konvenci:
 
 ```
-Solitea.<Zakaznik>.<Reseni>.<Vrstva>
+RhDev.<Zakaznik>.<Reseni>.<Vrstva>
 ```
 
 ##### Implementace kontejneru v klientských řešeních
@@ -432,9 +432,9 @@ public override void SetValue(ConfigurationKey key, object value)
 	
 ```
 ```csharp
-Guard.StringNotNullOrWhiteSpace(area, nameof(area), "No default Solitea Logging service was registered. Please register this service first");
+Guard.StringNotNullOrWhiteSpace(area, nameof(area), "No default RhDev Logging service was registered. Please register this service first");
 
-            Guard.CollectionNotNullAndNotEmpty(categories, nameof(categories), "No categories for default Solitea Logging service was registered.");
+            Guard.CollectionNotNullAndNotEmpty(categories, nameof(categories), "No categories for default RhDev Logging service was registered.");
 			
 			Guard.CollectionNotNullAndNotEmpty(
                 defaultArea.Categories.ToList(),
@@ -685,7 +685,7 @@ Pomocí průvodce postupně vytvořit context pro existující databázi.
 Kód přístupu k SQL datům by měl být implementován ve vrstvě datové implementace se sufixem *DataAccess.Sql*.
 Pro práci s datovou vrstvou společné knihovny je nutné pomocí NUGET přidat referenci na interní balíček společné knihovny:
 
-> Solitea.SharePoint.Common.DataAccess.Sql  
+> RhDev.SharePoint.Common.DataAccess.Sql  
 
 ###### DBContext
 Při database-first přístupu je kontextová třída (třída dědící DbContext) databáze generována automaticky designerem ADONET.
@@ -816,7 +816,7 @@ V případě že daná entita není registrovaná jako auto-registační vývoj�
 Connection string aplikační databáze by měl být přístupný jako šifrovaný konfigurační parametr v globální konfiguraci řešení. Společná knihovna obsahuje globální konfigurační objekt *GlobalConfiguration* obsahující vlastnost *ConnectionString*. Hodnota této vlastnosti je šifrována vnitřním encryptorem. Parametr connection stringu je obalen v třídě *ConnectionInfoFetcher*, který je registrován jako singleton a je validní a neměnný po celou dobu běhu procesu. Konstruktor přijímá daný objekt typu *GlobalConfiguration*, který využívá jako zdroj pro connection string. Tento konfigurační objekt může být v klientských řešeních rozšířen, jeho rozšíření je nutné zaregistrovat v kontejneru:
 ```csharp
 For<SharePoint.Common.DataAccess.SharePoint.Configuration.Objects.GlobalConfiguration>().
-	Use<Solitea.Customer.Solution.Common.Configuration.GlobalConfiguration>();
+	Use<RhDev.Customer.Solution.Common.Configuration.GlobalConfiguration>();
 ```
 !!! Connection string musí být uložen v plném formátu včetně metadatových parametrů ADONET modelu:
 
@@ -1087,8 +1087,8 @@ concurrentDataAccessRepository.UseService<AdAccessService>(() =>
 | StructureMap.AutoMocking   | Propora pro unit testing   |-   |3.1.6.186|Developer balíček, verze nerozhoduje|
 
 #### WSP řešení a instalace společné knihovny na farmě SharePoint
-Řešení je distribuováno jako skupina WSP balíčků pro farmu SharePoint kompatibilní s verzemi **2016** a **2019**. Balíčky včetně instalační složky se v prostředí Solitea - BP nacházejí v UNC:
-> \\dx-vyvoj\release\Zákazníci\Solitea\_internal\common\install\[**verze**]
+Řešení je distribuováno jako skupina WSP balíčků pro farmu SharePoint kompatibilní s verzemi **2016** a **2019**. Balíčky včetně instalační složky se v prostředí RhDev - BP nacházejí v UNC:
+> \\dx-vyvoj\release\Zákazníci\RhDev\_internal\common\install\[**verze**]
 
 Jednotlivé verze jsou postupně vydávány na základě výsledků kontinuální integrace jednotlivých buildů (tento proces zatím není automatizovaný). Seznam verzí obsahuje i složku *_latest* s poslední (aktuální) verzí knihovny.
 Obsah adresářové struktury:
@@ -1107,8 +1107,8 @@ install
 		   │		  │         │─ExecuteInstallation.ps1
 		   │		  │         │─UpdateApplication.ps1
 		   │		  │──Packages
-		   │		  │         │─Solitea.SharePoint.wsp
-		   │		  │         │─Solitea.SharePoint.Externals.wsp
+		   │		  │         │─RhDev.SharePoint.wsp
+		   │		  │         │─RhDev.SharePoint.Externals.wsp
 		   │		  │──000_Init.ps1
 		   │		  │──001_AddAndDeployCORE.ps1
 		   │		  │──002_AddAndDeployJOBS.ps1
@@ -1146,9 +1146,9 @@ Jak zjistit jaký Framework je na cílovém prostředí nainstalovaný:
 
 |Název v SP HIVE  |CZ lokalizace   | ID   | Význam   |
 | ------------ | ------------ | ------------ | ------------ |
-|Solitea.SharePoint_Web   | Solitea společné  |d691910d-4c56-49c5-a87c-0c7c3cd1e83e   | Seznamy konfigurace, log a státní svátky. Featura je závislá na *Solitea.SharePoint_Site*, závislost je řešena automaticky kódovou aktivací  |
-|Solitea.SharePoint_Site   |Solitea společné   |e0f3966e-25d5-4427-959d-6f5cf5c19095   | Typy obsahu a sloupce pro seznamy   |
-|Solitea.SharePoint_Farm   |Solitea Common (pevně bez lokalizace)   |7a2d9721-7980-45ca-b66e-c14b34c8a037   | Obsahuje společný trace logger řešení   |
+|RhDev.SharePoint_Web   | RhDev společné  |d691910d-4c56-49c5-a87c-0c7c3cd1e83e   | Seznamy konfigurace, log a státní svátky. Featura je závislá na *RhDev.SharePoint_Site*, závislost je řešena automaticky kódovou aktivací  |
+|RhDev.SharePoint_Site   |RhDev společné   |e0f3966e-25d5-4427-959d-6f5cf5c19095   | Typy obsahu a sloupce pro seznamy   |
+|RhDev.SharePoint_Farm   |RhDev Common (pevně bez lokalizace)   |7a2d9721-7980-45ca-b66e-c14b34c8a037   | Obsahuje společný trace logger řešení   |
 
 ##### Pravidla pro vývoj
 Při vývoji nebo rozvoji knihovny je třeba dbát na některá pravidla, která je třeba z důvodu kompatibility se zákaznickými řešeními dodržovat.
@@ -1211,22 +1211,22 @@ Společná šablona umožňuje strukturovat zákaznické projekty podle předem 
 ### Instalace šablony
 Soubor šablony dostupný v UNC:
 
-> \\dx-vyvoj\release\Zákazníci\Solitea\_internal\common\template\Solitea.Zakaznik.Reseni.zip
+> \\dx-vyvoj\release\Zákazníci\RhDev\_internal\common\template\RhDev.Zakaznik.Reseni.zip
 
 je nutné nakopírovat do složky s šablonami v příslušné instalaci verze VS, která je dostupná:
 > [User system folder]\Documents\Visual Studio [Verze]\Templates\ProjectTemplates\
 
 Ve VS je poté nová šablona dostupná při vytváření nového projektu:
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/SoliteaTemplate.PNG)
+![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/RhDevTemplate.PNG)
 
 #### Název projektu
 Při vytváření projektu podle šablony by měl název projektu dodržovat jmennou konvenci:
 
-**Solitea.[Zákazník].[Řešení]**
+**RhDev.[Zákazník].[Řešení]**
 
 kde *Zákazník* je zkratka zákazníka bez diakritiky (MP, Globus, AVE) a *Řešení* je jednoznačný název řešení (DMS, Vouchers, NotificationCenter). Po aplikaci šablony s názvem projektu **A.B.C** dojde k vytvoření následující struktury řešení:
 
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/SoliteaTemplateProject.PNG)
+![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/RhDevTemplateProject.PNG)
 Řešení obsahuje následující projekty:
 
 | Projekt  | Význam a obsah projektu   |
@@ -1397,7 +1397,7 @@ Nový feed lze přidat ve VS přes:
 
 Vpravo nahře kliknout na tlačítko "PLUS" a přidat:
 - **Name** =Libovolný název reprezentující daný feed (př. AzureArtifacts)
-- **Source** = https://pkgs.dev.azure.com/Solitea-BP/Solitea/_packaging/dxnet/nuget/v3/index.json
+- **Source** = https://pkgs.dev.azure.com/RhDev-BP/RhDev/_packaging/dxnet/nuget/v3/index.json
 
 #### PackageReference
 Z důvodu lepší kompatibility a sjedocení se systémem ve společné knihovně je vhodné nastavit PackageReference jako systém správy balíčků.
