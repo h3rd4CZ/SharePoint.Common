@@ -1,4 +1,4 @@
-# SharePoint - common library to build full-trust code on-premises SharePoint applications
+# Common library to build full-trust code on-premises SharePoint applications
 
 Význam jednotlivých vrstev:
 
