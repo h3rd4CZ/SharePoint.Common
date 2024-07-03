@@ -1,4 +1,10 @@
-# Common library to build full-trust code on-premises SharePoint applications
+# Knihovna pro vývoj SharePoint on-premises full-trust řešení
+Knihovna pokrývá standardní scénáře implementace jednotlivých koncernů při vývoji aplikací postavených nad technologií SharePoint. 
+Jedná se především o logování, konfiguraci, zapouzdření a přístup k objektovému modelu SharePoint, instalaci, upgrade funkcí, práce s uživateli, skupinami a oprávněními a mnoho dalšího.
+
+High level schéma architektonického uspořádání komponentového modelu knihovny:
+
+![highLevelView](https://github.com/h3rd4CZ/SharePoint.Common/assets/26761600/a771168e-cf11-4a6d-ade5-7f149a54d21f)
 
 Význam jednotlivých vrstev:
 
@@ -7,7 +13,7 @@ Význam jednotlivých vrstev:
 | Common | Obecná akstrakce| Obsahuje základní  objekty / služby, systémové třídy pro základní objekty, POCO objekty atd...  |
 | DataAccess  | Datová abstrakce| Obsahuje abstraktní objekty přístupu k datům DTO objekty, fasády, factory. |
 | DataAccess implementation  |Datová implementace| Vrstva implementace datového přístupu. Těchto vrstev je v rozsáhlejších systémech typicky více. Nejčastější vrstvy v klientských řešeních jsou SharePoint a Sql|
-| Implementation  |Obecná implementace | Obsahuje v podstatě implementaci doménové / business logiky pro konkrétní komponentu |
+| Implementation  |Obecná implementace | Obsahuje implementaci doménové / business logiky pro konkrétní komponentu |
 
 ------------
 Řešení by měla dodržovat následující pravidla objektově orientovaného přístupu, jsou to především:
@@ -22,14 +28,6 @@ Význam jednotlivých vrstev:
 - DI
 -  Organizace kódu dle DDD a komponentového rozdělení dle popisu výše
 
-## Knihovna
-Samotná knihovna je distribuována jako sada NPM balíčků rozdělených do jednotlivých komponentových vrstev. V rámci CI je každá nová verze publikována do interního NPM feedu realizovaného pomocí Azure Artifacts.
-
-[RhDev common library Azure Artifacts feed](https://dev.azure.com/RhDev-BP/RhDev/_packaging?_a=feed&feed=dxnet "RhDev common library Azure Artifacts feed")
-
-
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/NugetCommonLib.png)
-
 #### Minimální požadavky
 
 | Platforma  | Minimální verze   |
@@ -37,29 +35,6 @@ Samotná knihovna je distribuována jako sada NPM balíčků rozdělených do je
 | SharePoint  |  2016  |
 | .net Framework  | 4.7.2   |
 | .net CLR  | 4.0   |
-| Nuget  | XXX (musí podporovat PackageReference z *.csproj), [Nuget PackageReference](https://docs.microsoft.com/cs-cz/nuget/consume-packages/package-references-in-project-files)   |
-| Visual studio  | 2017   |
-
-#### Kontinuální integrace
-Knihovna je napojena v rámci Azure Devops na kontinuální integraci. Každý nový přírůstek generuje novu sadu knihoven do interního Nuget feedu, kterou poté využívají jedntlivá klientská řešení založená na společné šabloně.
-
-------------
-
-Pipeline buildu obsahuje posloupnost následujících akcí:
-
-| Fáze  |Popis   |
-| ------------ | ------------ |
-| 0. Checkout zdrojových kódů  | Zpracování zdrojových kódů řešení   |
-| 1. NuGetToolInstaller  | Instalace balíčkovacího systému Nuget   |
-| 2. NuGetCommand   | Instalace veškerých Nuget balíčků dle definice řešení |
-| 3. PowerShell   |  Zapsání Nuget verze balíčků knihoven dle čísla buildu. Číslo buildu je definováno jako : ***1.$(Year:yy).$(DayOfYear).$(BuildID)***  Major verzi knihovny je v budoucnu možné posunout ručně na vyšší verzi. |
-| 4. Assembly-Info-NetFramework|  Zapsání verze buildu do *AssemblyInfo.cs*  do jednotlivých knihoven. Zapisuje se pouze File version, Assembly verze je nastavena defaultně na verzi **1.0.0.0**  |
-| 5. Build   | Build všech projektů řešení v dané build konfiguraci |
-| 6. Test   | Provedení definovaných testů. V rámci řešení je definováno několik testů rozdělěných do skupin. Code coverage je na cca 11%. V budoucnu je nutné zvýšit. Testovací třídy se nachází v assembly **RhDev.SharePoint.Common.Test.dll** |
-| 7. CopyFiles   | Kopírování Nuget balíčků jako výsledku buildu do *artifactstagingdirectory* |
-| 8. NuGetCommand - push   | Vypublikování hotových NUGET balíčků do interního feedu |
-
-[Definice pipeline v Azure devops pipeline](https://dev.azure.com/RhDev-BP/RhDev/_apps/hub/ms.vss-build-web.ci-designer-hub?pipelineId=8&branch=master "Definice pipeline v Azure devops pipeline")
 
 #### IoC
 
@@ -179,7 +154,7 @@ Strong name knihoven musí obsahovat následující záznamy:
 | ------------ | ------------ |
 |1.0.0.0   | 78afb44363f8be41   |
 
-Verze všech knihoven musí být neměnná a nastavená na verzi **1.0.0.0**. Platí pro všechna RhDev BP řešení, u kterých dochází k IoC registracím pomocí kontejneru. Public key token je generován veřejným klíčem, kterým jsou podepisovány jednolivé RhDev common library. Tento klíč je přiložen v řešení vytvářeném ze šablony, vývojář řešení se nemusí o nic starat. Tyto defaultní parametry je možné v definici registrace zapsat pomocí builderu zmíněného výše:
+Verze všech knihoven musí být neměnná a nastavená na verzi **1.0.0.0**. Platí pro všechna řešení, u kterých dochází k IoC registracím pomocí kontejneru. Public key token je generován veřejným klíčem, kterým jsou podepisovány jednolivé knihovny. Tento klíč je přiložen v řešení vytvářeném ze šablony, vývojář řešení se nemusí o nic starat. Tyto defaultní parametry je možné v definici registrace zapsat pomocí builderu zmíněného výše:
 ```csharp
 WithDefaultRhDevPKTAndVersion()
 ```
@@ -357,8 +332,6 @@ Knihovna obsahuje dva zdroje správy konfigurace.
 ###### Konfigurace na úrovni webu
 Tato konfigurace je uložena prostřednictvím seznamu na příslušném webu aplikace. Každý záznam konfigurace obsahuje modul klíč a hodnotu. Jednotlivé záznamy konfigurace jsou agregovány dle modulů.
 
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/AppConfiguration.PNG)
-
 Každý modul konfigurace reprezentuje jedna bekendová třída a zajišťuje přístup k jednotlivým konfiguračním parametrům daného modulu:
 
 ```csharp
@@ -435,8 +408,6 @@ Guard.StringNotNullOrWhiteSpace(area, nameof(area), "No default RhDev Logging se
                 defaultArea.Categories.ToList(),
                 nameof(defaultArea), "Default area categories are empty, please specify default categories when register the diagnostics service");
 ```
-Ošetřování by se mělo používat minimálně u vstupních parametrů metod.
-
 ##### Notifikace
 Knihovna obsahuje jednoduchý notifikační provider pro odesílání emailových oznámení prostřednictvím standardního .net emailového klienta (*SmtpClient*) nebo SharePoint klienta (*SPUtility.SendEmail*). Defaultně je použit .net emailový klient.
 
@@ -668,8 +639,7 @@ Nad objektem typu *SPUser* je vytvořena abstrakce v podobě jednotného rozhran
 2. *UserInfo* - Objekt reprezentující uživatele SharePoint
 
 ##### Sql Data access
-Knihovna obsahuje jednoduchý database-first repository pattern přístupu k SQL datům a využívá ORM **Entity framework 6.X**. 
-Database-first přístup je zvolen na základě zvyklostí a již odzkoušeném a bezproblémovém způsobu implementace v zákaznických prostředích.
+Knihovna obsahuje jednoduchý database-first repository pattern přístupu k SQL datům a využívá ORM **Entity framework**. 
 
 Při database-first přístupu je nutné celý databázový model vygenerovat pomocí ADONET entity data modelu.
 Model lze vložit do projektu přes:
@@ -707,7 +677,7 @@ Po každém update databáze nebo po prvním vygenerování je nutné override k
 ```
 
 ###### Eager loading 
-Přímý přístup pomocí repository patternu není kompatibilní s lazy loading a veškerá related data odkazující v relacích mezi entitami je třeba definovat při prvním přístupu pomocí přetížení čtecích metod.
+Přímý přístup pomocí implementovaného repository patternu není kompatibilní s lazy loading a veškerá related data odkazující v relacích mezi entitami je třeba definovat při prvním přístupu pomocí přetížení čtecích metod.
 
 ```csharp
 TStoreEntity ReadById(
@@ -726,11 +696,11 @@ IList<TStoreEntity> ReadAll(
 );
 ```
 
-Pomocí parametru *Include* je možné definovat loading 1-N entit. Příklad poutití:
+Pomocí parametru *Include* je možné explicitně definovat loading related entit. Příklad poutití:
 ```csharp
 var book = 
 		bookRepository.ReadAll(
-			include: new List<Expression<Func<Book, object>>> { b => b.Author1 }
+			include: new List<Expression<Func<Book, object>>> { b => b.Author }
 );
 ```
 ###### Lazy loading
@@ -807,6 +777,7 @@ Použití autoregistrační entity pomocí služby *IDataStoreAcessRepositoryFac
   var authorRepository = factory.GetStoreRepository<Author>();
 ```
 V případě že daná entita není registrovaná jako auto-registační vývojář se o její vytvoření musí postarat sám pomocí explicitní factory.
+
 ###### Connection string
 Connection string aplikační databáze by měl být přístupný jako šifrovaný konfigurační parametr v globální konfiguraci řešení. Společná knihovna obsahuje globální konfigurační objekt *GlobalConfiguration* obsahující vlastnost *ConnectionString*. Hodnota této vlastnosti je šifrována vnitřním encryptorem. Parametr connection stringu je obalen v třídě *ConnectionInfoFetcher*, který je registrován jako singleton a je validní a neměnný po celou dobu běhu procesu. Konstruktor přijímá daný objekt typu *GlobalConfiguration*, který využívá jako zdroj pro connection string. Tento konfigurační objekt může být v klientských řešeních rozšířen, jeho rozšíření je nutné zaregistrovat v kontejneru:
 ```csharp
@@ -942,7 +913,7 @@ Celá logika je obalena abstraktní generickou třídou *UnitTestOf* jejímž ge
         }
     }
 ```
-Pro snažší asserci jednotlivých výsledků je použito fluent api externí knihovny *FluentAssertions*.
+Pro snažší asserci je použito fluent api externí knihovny *FluentAssertions*.
 
 ##### Instalace / upgrade feature
 Kódová instalace featur probíha standarními prostředky pomocí event receiverů. 
@@ -1082,8 +1053,7 @@ concurrentDataAccessRepository.UseService<AdAccessService>(() =>
 | StructureMap.AutoMocking   | Propora pro unit testing   |-   |3.1.6.186|Developer balíček, verze nerozhoduje|
 
 #### WSP řešení a instalace společné knihovny na farmě SharePoint
-Řešení je distribuováno jako skupina WSP balíčků pro farmu SharePoint kompatibilní s verzemi **2016** a **2019**. Balíčky včetně instalační složky se v prostředí RhDev - BP nacházejí v UNC:
-> \\dx-vyvoj\release\Zákazníci\RhDev\_internal\common\install\[**verze**]
+Řešení je distribuováno jako skupina WSP balíčků pro farmu SharePoint kompatibilní s verzemi **2016** a **2019**.
 
 Jednotlivé verze jsou postupně vydávány na základě výsledků kontinuální integrace jednotlivých buildů (tento proces zatím není automatizovaný). Seznam verzí obsahuje i složku *_latest* s poslední (aktuální) verzí knihovny.
 Obsah adresářové struktury:
@@ -1122,7 +1092,7 @@ Pomocí jednoduchého UI průvodce je v rámci instalace nutné postupně spusti
 |Skript / krok   | Význam   |
 | ------------ | ------------ |
 |001_AddAndDeployCORE.ps1  | Přidání a deploy core řešení knihovny   |
-|002_AddAndDeployJOBS.ps1   | Skript se nespouští, je možné přeskočit ('n') nebo ('ESC'), skript je připraven na verzi obsahující časové úlohy. Knihovna v současné verzi 1.20.246.113 zatím žádné časové úlohy neobsahuje |
+|002_AddAndDeployJOBS.ps1   | Skript se nespouští, je možné přeskočit ('n') nebo ('ESC'), skript je připraven na verzi obsahující časové úlohy. 
 |003_AddAndDeployExternals.ps1   |Přidání a deploy balíčku s externími knihovnami   |
 |004_EnableFeatures_Global.ps1   | Aktivace featury se společným TraceLoggerem   |
 |801_RestartTimer.NOAUTORUN.ps1   | Recyklace OWS, není nutné spouštět   |
@@ -1146,10 +1116,10 @@ Jak zjistit jaký Framework je na cílovém prostředí nainstalovaný:
 |RhDev.SharePoint_Farm   |RhDev Common (pevně bez lokalizace)   |7a2d9721-7980-45ca-b66e-c14b34c8a037   | Obsahuje společný trace logger řešení   |
 
 ##### Pravidla pro vývoj
-Při vývoji nebo rozvoji knihovny je třeba dbát na některá pravidla, která je třeba z důvodu kompatibility se zákaznickými řešeními dodržovat.
+Při vývoji nebo rozvoji knihovny je třeba dbát na některá pravidla, která je třeba z důvodu kompatibility a breaking changes dodržovat.
 ###### Breaking change
 Breaking change není při vývoji knihovny žádoucí a nemělo by k němu při úpravách respektive vývoji docházet.
-Společná knihovna může být sdílena více zákaznickými řešeními a různý kód v rozdílných verzích knihovny může způsobit nežádoucí chování v zákaznickcých knihovnách.
+Společná knihovna může být sdílena více řešeními a různý kód v rozdílných verzích knihovny může způsobit nežádoucí chování v zákaznickcých knihovnách.
 Příklad úpravy metody:
 > Foo.cs (1.0.0)
 
@@ -1204,24 +1174,15 @@ U verzování knihoven společného projektu musí platit:
 Společná šablona umožňuje strukturovat zákaznické projekty podle předem vygenerované skupiny souborů a konfiguračních parametrů jednotně pro všechna zákaznická řešení.
 Šablona je dostupná pro verze **SharePoint 2016** a **SharePoint 2019**.
 ### Instalace šablony
-Soubor šablony dostupný v UNC:
-
-> \\dx-vyvoj\release\Zákazníci\RhDev\_internal\common\template\RhDev.Zakaznik.Reseni.zip
-
-je nutné nakopírovat do složky s šablonami v příslušné instalaci verze VS, která je dostupná:
 > [User system folder]\Documents\Visual Studio [Verze]\Templates\ProjectTemplates\
-
-Ve VS je poté nová šablona dostupná při vytváření nového projektu:
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/RhDevTemplate.PNG)
 
 #### Název projektu
 Při vytváření projektu podle šablony by měl název projektu dodržovat jmennou konvenci:
 
-**RhDev.[Zákazník].[Řešení]**
+**[RootName].[Zákazník].[Řešení]**
 
-kde *Zákazník* je zkratka zákazníka bez diakritiky (MP, Globus, AVE) a *Řešení* je jednoznačný název řešení (DMS, Vouchers, NotificationCenter). Po aplikaci šablony s názvem projektu **A.B.C** dojde k vytvoření následující struktury řešení:
+kde *Zákazník* je zkratka zákazníka bez diakritiky a *Řešení* je jednoznačný název řešení (DMS, Vouchers, NotificationCenter). Po aplikaci šablony s názvem projektu **A.B.C** dojde k vytvoření následující struktury řešení:
 
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/RhDevTemplateProject.PNG)
 Řešení obsahuje následující projekty:
 
 | Projekt  | Význam a obsah projektu   |
@@ -1236,7 +1197,6 @@ kde *Zákazník* je zkratka zákazníka bez diakritiky (MP, Globus, AVE) a *Ře�
 
 #### Popis SharePoint řešení
 Core balíček SharePoint projektu obsahuje bázovou strukturu s několika předgenerovanými soubory:
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/TemplateSolution.PNG)
 
 Řešení obsahuje web site a farm scoped featury. Farm featura respektiove její receiver obsahuje přípravu pro instalaci trace loggeru klientského řešení.
 Řešení obsahuje dva soubory s resources. Defaultní český a jeden překlad *en-US*. Toto nastavení předpokládá defaultní jazyk kolekce nebo webu daného řešení v *cs-CZ*.
@@ -1258,7 +1218,7 @@ Navíc jsou zde skripty:
 |008_CreateDatabase.ps1   | Vytvoření datové struktury řešení, instalace a konfigurace databáze |
 |009_AddAdminAsApplicationAdmin.ps1   | Umožňuje přidat site admina do aplikační administrátorské role, pokud je vytvořena  |
 
-Konfigurace dané instalace se provádí definicí konfiguračních parametrů v init skriptu (Konfigurovatelné parametry jsou označeny tagem *#ENV*, ostatné parametry jsou předgenerované a pevně určené a k jejich změně by nemělo docházet):
+Konfigurace dané instalace se provádí definicí konfiguračních parametrů v init skriptu (Konfigurovatelné parametry jsou označeny tagem *#ENV*, ostatní parametry jsou předgenerované a pevně určené a k jejich změně by nemělo docházet):
 
 > 000_Init.ps1
 
@@ -1381,32 +1341,9 @@ IoC.Get.Frontend.BuildUp(o)
 Předgenerovaná definice kontejneru se nachází v souboru */Setup/CompositionDefinition.cs*. Při implementaci nových komponent respektive vrstev je nutné tyto zaregistrovat zde.
 Jak definovat požadavky pro IoC pomocí vnitřního builderu je popsáno v kapitole [IoC](#ioc)
 
-### NuGet
-Reference na externí komponenty včetně společné knihovny je realizována prostřednictvím NuGet balíčkovacího systému.
-Při rebuild řešení nebo po explicitním operaci restore dojde k instalaci všech balíčků definovaných v jednotlivých projektových souborech. Vedle oficiálního nuget feedu je nutné přidat referenci také na privátní feed, ze kterého jsou instalovány knihovny ze společného řešení.
-
-#### Privátní Feed
-Nový feed lze přidat ve VS přes:
-
-> Tools -> Options ->NuGet Package Manager ->Package Sources
-
-Vpravo nahře kliknout na tlačítko "PLUS" a přidat:
-- **Name** =Libovolný název reprezentující daný feed (př. AzureArtifacts)
-- **Source** = https://pkgs.dev.azure.com/RhDev-BP/RhDev/_packaging/dxnet/nuget/v3/index.json
-
-#### PackageReference
-Z důvodu lepší kompatibility a sjedocení se systémem ve společné knihovně je vhodné nastavit PackageReference jako systém správy balíčků.
-Nastavení se provádí:
-
-> Tools -> Options ->NuGet Package Manager -> General -> Default package management format
-
-zde nastavit na *PackageReference*.
-
 #### Verze
 Externí komponenty jsou nastaveny fixně na verze definované výše v kapitole [Externí knihovny](#externí-knihovny)
 Verze pro společnou knihovnu je nastavena u všech komponent na iniciální verze **1.0.0**. O povýšení verze u konkrétního řešení rozhodne vývojář dle verze společné knihovny nainstalované u konkrétního zákazníka. Povýšení je nutné provést ve všech projektech a pro všechny komponenty společné knihovny:
-
-![](https://storageaccountscdlpa8ad.blob.core.windows.net/imgcontainer/CommonLibVersion.PNG)
 
 #### Kompatibilita
 Kompatibilita společné knihovny a jednotlivých zákaznických řešení by měla dodržovat pravidla dle tabulky:
@@ -1418,9 +1355,3 @@ Kompatibilita společné knihovny a jednotlivých zákaznických řešení by m�
 | X.Y.Z  | v > X.Y.Z   | Nedoporučeno a nemělo by nastávat, nainstalovaná verze knihovny u zákazníka nemusí obsahovat nové funkce odkazované ze zákaznického řešení.|
 
 Z důvodu lepší organizace při vývoji a úpravách zákaznických řešení je vhodné aby informace o verzích u jednotlivých zákazníků byly organizovány na jednom společném místě, tak aby se předešlo konfliktům s verzováním knihoven.
-
-
-
-
-
-
